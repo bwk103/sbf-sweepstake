@@ -23,6 +23,10 @@ describe('Fixture', () => {
       fixture.round = null;
       await expect(fixture.validate()).rejects.not.toBe(null);
     });
+    test('round cannot be anything but Group or Knock-out', async () => {
+      fixture.round = 'Qualifier';
+      await expect(fixture.validate()).rejects.not.toBe(null);
+    });
     test('complete cannot be null', async () => {
       fixture.complete = null;
       await expect(fixture.validate()).rejects.not.toBe(null);
