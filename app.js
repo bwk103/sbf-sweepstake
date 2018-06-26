@@ -66,7 +66,7 @@ app.get('/teams', async (req, res) => {
 });
 
 app.get('/teams/new', async (req, res) => {
-  res.send('This is going to be where we add teams');
+  res.send('This is going to be where we display the add team form');
 });
 
 app.post('/teams', async (req, res) => {
@@ -87,7 +87,16 @@ app.post('/teams', async (req, res) => {
 });
 
 app.delete('/team/:id', async (req, res) => {
-  res.send('This is going to be where we delete a team');
+  try {
+    const deletedTeam = await Team.findOneAndRemove(req.params.id);
+    if (!deletedTeam) {
+      return res.status(404).send('There has been a problem deleting the team');
+    }
+    return res.status(200).send('Team deleted successfully');
+  } catch (err) {
+    console.log(err);
+    return res.send(404).send('There was a problem deleting the team');
+  }
 });
 
 module.exports = app;
