@@ -18,3 +18,12 @@ describe('root path', () => {
     });
   });
 });
+
+describe('/players', () => {
+  describe('GET request', () => {
+    test('returns 200 status code', async () => {
+      const response = await request(app).get('/players');
+      expect(response.statusCode).toBe(200);
+    });
+  });
+});
