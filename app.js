@@ -4,6 +4,7 @@
 const db = require('./db/config.js');
 const express = require('express');
 const Player = require('./db/models/player');
+const Team = require('./db/models/team');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -52,6 +53,41 @@ app.delete('/player/:id', async (req, res) => {
     console.log(err);
     return res.status(500).send({ response: 'There was an error trying to delete the player' });
   }
+});
+
+app.get('/teams', async (req, res) => {
+  try {
+    const allTeams = await Team.find({});
+    res.status(200).send(allTeams);
+  } catch (err) {
+    console.log(err);
+    res.status(404).send('There has been an error');
+  }
+});
+
+app.get('/teams/new', async (req, res) => {
+  res.send('This is going to be where we add teams');
+});
+
+app.post('/teams', async (req, res) => {
+  const newTeam = new Team({
+    name: req.body.name,
+    flag: req.body.flag,
+    fixtures: [],
+    points: req.body.points,
+    goals: req.body.goals,
+  });
+  try {
+    const savedTeam = await newTeam.save();
+    res.status(201).send('Team saved successfully');
+  } catch (err) {
+    console.log(err);
+    res.status(409).send('There has been a problem adding the new team');
+  }
+});
+
+app.delete('/team/:id', async (req, res) => {
+  res.send('This is going to be where we delete a team');
 });
 
 module.exports = app;
