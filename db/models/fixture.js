@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const fixtureSchema = mongoose.Schema({
   teams: { type: Array },
   round: { type: String },
-  complete: { type: Boolean },
-  result: { type: String },
+  complete: { type: Boolean, required: true },
+  result: { type: String, required: true },
   et: { type: Boolean },
 });
 
