@@ -21,10 +21,6 @@ describe('Player', () => {
       player.points = null;
       await expect(player.validate()).rejects.not.toBe(null);
     });
-    test('choices cannot be null', async () => {
-      player.choices = null;
-      await expect(player.validate()).rejects.not.toBe(null);
-    });
   });
 });
 

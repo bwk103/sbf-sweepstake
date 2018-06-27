@@ -6,23 +6,26 @@ afterAll(() => {
   db.disconnect();
 });
 
-describe('root path', () => {
-  describe('GET request', () => {
-    test('returns 200 status code', async () => {
-      const response = await request(app).get('/');
-      expect(response.statusCode).toBe(200);
-    });
-    test('returns appropriate response', async () => {
-      const response = await request(app).get('/');
-      expect(response.text).toBe('Hello World!');
-    });
-  });
-});
-
 describe('/players', () => {
   describe('GET request', () => {
     test('returns 200 status code', async () => {
       const response = await request(app).get('/players');
+      expect(response.statusCode).toBe(200);
+    });
+  });
+});
+describe('/teams', () => {
+  describe('GET request', () => {
+    test('returns 200 status code', async () => {
+      const response = await request(app).get('/teams');
+      expect(response.statusCode).toBe(200);
+    });
+  });
+});
+describe('/fixtures', () => {
+  describe('GET request', () => {
+    test('returns 200 status code', async () => {
+      const response = await request(app).get('/fixtures');
       expect(response.statusCode).toBe(200);
     });
   });
